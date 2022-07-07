@@ -21,6 +21,18 @@ menucancelButton.addEventListener("click",function(){
     navPhoneContainer.style.right='-120vw';
 })
 
+let cartbutton=document.getElementById("cartButton")
+let cartcancelbutton=document.getElementById("cartcancelbutton")
+let cartcontainer=document.getElementById("cartcontainer")
+cartbutton.addEventListener("click",function(){
+    cartcontainer.style.right='0px';
+    
+
+})
+cartcancelbutton.addEventListener("click",function(){
+    cartcontainer.style.right='-120vw';
+})
+
 let complete=[
     {
     id:'c1',
@@ -463,5 +475,38 @@ categories.forEach(function(item){
         productName.innerHTML=product.name;
         ProductPrice.innerHTML=product.price;
         ProductButton.innerHTML="ADD TO CART"
+        ProductButton.addEventListener("click",function(){
+            cart.push(product)
+            console.log(cart)
+                let cartProduct=document.createElement("div")
+                cartProduct.classList.add("cartproduct")
+                let cartproductImg=document.createElement("img")
+                cartproductImg.classList.add("cartproductimg")
+                let text=document.createElement("div")
+                text.classList.add("text")
+                let cartproductName=document.createElement("h6")
+                cartproductName.classList.add("cartproductname")
+                let cartProductPrice=document.createElement("h6")
+                cartProductPrice.classList.add("cartproductprice")
+                let cartProductButton=document.createElement("button")
+                cartProductButton.classList.add("cartproductButton")
+                    
+                cartcontainer.appendChild(cartProduct)
+                cartProduct.appendChild(cartproductImg)
+
+                text.appendChild(cartproductName)
+                text.appendChild(cartProductPrice)
+                cartProduct.appendChild(text) 
+                cartProduct.appendChild(cartProductButton)     
+                cartproductImg.src=product.img;
+                cartproductName.innerHTML=product.name;
+                cartProductPrice.innerHTML=product.price;
+                cartProductButton.innerHTML="REMOVE"
+                cartProductButton.addEventListener("click",function(){
+                    cart.pop(product)
+                    cartcontainer.removeChild(cartProduct)
+                    console.log(cart)
+                })
+        })
     })
 })
